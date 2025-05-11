@@ -50,7 +50,7 @@ public class DoctorRestController {
 
 	@PutMapping(value = "/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public void update(@PathVariable UUID id, @RequestBody DoctorEntry resource) {
+	public void update(@RequestBody DoctorEntry resource) {
 		service.update(resource);
 	}
 
