@@ -41,13 +41,13 @@ public class DoctorRestController {
 		return service.findById(id);
 	}
 
-	@PostMapping(consumes = {"application/json"}) 
+	@PostMapping(consumes = {"*/*"})
 	@ResponseStatus(HttpStatus.CREATED)
 	public DoctorEntry create(@RequestBody DoctorEntry resource) {
 		return service.create(resource);
 	}
 
-	@PutMapping(value = "/{id}", consumes = {"application/json"})
+	@PutMapping(value = "/{id}", consumes = {"*/*"})
 	@ResponseStatus(HttpStatus.OK)
 	public DoctorEntry update(@PathVariable UUID id, @RequestBody DoctorEntry resource) {
 		return service.update(id, resource);
