@@ -1,6 +1,5 @@
 package com.barry.example.rest;
 
-import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
@@ -38,7 +37,7 @@ public class DoctorRestController {
 	}
 
 	@GetMapping(value = "/{id}")
-	public Optional<DoctorEntry> findById(@PathVariable UUID id) {
+	public DoctorEntry findById(@PathVariable UUID id) {
 		return service.findById(id);
 	}
 
@@ -50,8 +49,8 @@ public class DoctorRestController {
 
 	@PutMapping(value = "/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public void update(@RequestBody DoctorEntry resource) {
-		service.update(resource);
+	public DoctorEntry update(@PathVariable UUID id, @RequestBody DoctorEntry resource) {
+		return service.update(id, resource);
 	}
 
 	@DeleteMapping(value = "/{id}")

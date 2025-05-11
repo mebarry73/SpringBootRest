@@ -28,7 +28,7 @@ public class DoctorEntry {
 
 	}
 
-	public DoctorEntry(UUID id, String license, String name) {
+	public DoctorEntry(UUID id, Integer license, String name) {
 		this.id = id;
 		this.license = license;
 		this.name = name;
@@ -39,7 +39,7 @@ public class DoctorEntry {
 	private UUID id;
 
 	@Column
-	private String license;
+	private Integer license;
 
 	@Column
 	private String name;

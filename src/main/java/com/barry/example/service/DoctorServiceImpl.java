@@ -21,12 +21,27 @@ public class DoctorServiceImpl {
 		repository.deleteById(id);
 	}
 
-	public void update(DoctorEntry resource) {
-		// to be implemented
+	public DoctorEntry update(UUID id, DoctorEntry resource) {
+		DoctorEntry doctorEntry = null;
+		Optional<DoctorEntry> found = repository.findById(id);
+		if (!found.isEmpty()) {
+			doctorEntry = found.get();
+			doctorEntry.setLicense(resource.getLicense());
+			doctorEntry.setName(resource.getName());
+			return repository.save(doctorEntry);
+		}
+
+		return doctorEntry;
 	}
 
-	public Optional<DoctorEntry> findById(UUID id) {
-		return repository.findById(id);
+	public DoctorEntry findById(UUID id) {
+		DoctorEntry doctorEntry = null;
+		Optional<DoctorEntry> found = repository.findById(id);
+		if (!found.isEmpty()) {
+			doctorEntry = found.get();
+		}
+
+		return doctorEntry;
 	}
 
 	public List<DoctorEntry> findAll() {
