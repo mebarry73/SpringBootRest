@@ -1,9 +1,9 @@
 package com.barry.example.service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.barry.example.model.DoctorEntry;
@@ -22,26 +22,15 @@ public class DoctorServiceImpl {
 	}
 
 	public DoctorEntry update(UUID id, DoctorEntry resource) {
-		DoctorEntry doctorEntry = null;
-		Optional<DoctorEntry> found = repository.findById(id);
-		if (!found.isEmpty()) {
-			doctorEntry = found.get();
-			doctorEntry.setLicense(resource.getLicense());
-			doctorEntry.setName(resource.getName());
-			return repository.save(doctorEntry);
-		}
-
-		return doctorEntry;
+		DoctorEntry doctorEntry = repository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("DoctorEntry not found!"));
+		doctorEntry.setLicense(resource.getLicense());
+		doctorEntry.setName(resource.getName());
+		return repository.save(doctorEntry);
 	}
 
 	public DoctorEntry findById(UUID id) {
-		DoctorEntry doctorEntry = null;
-		Optional<DoctorEntry> found = repository.findById(id);
-		if (!found.isEmpty()) {
-			doctorEntry = found.get();
-		}
-
-		return doctorEntry;
+		return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("DoctorEntry not found!"));
 	}
 
 	public List<DoctorEntry> findAll() {
